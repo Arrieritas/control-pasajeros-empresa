@@ -42,9 +42,11 @@ def generate_passengers_control(data):
                 if not value:
                     continue
 
-                print(value["despachos"])
                 if despachos.get(f'{key}-{value["terminal"]}-{value["jornada"]}'):
-                    if (despachos[f'{key}-{value["terminal"]}-{value["jornada"]}']["despachador"] != value["despachador"]):
+                    jornada = despachos[f'{key}-{value["terminal"]}-{value["jornada"]}']["jornada"]
+                    terminal = despachos[f'{key}-{value["terminal"]}-{value["jornada"]}']["terminal"]
+
+                    if ((jornada != value["jornada"]) and (terminal != value["terminal"])):
                         despachos[f'{key}-{value["terminal"]}-{value["jornada"]}'] = {
                         "terminal": value["terminal"],
                         "jornada": value["jornada"],
@@ -62,7 +64,6 @@ def generate_passengers_control(data):
                         "empresa": value["empresa"],
                         "despachos": value["despachos"]
                     }
-
 
 
         buses_dic[str(i)] = bus_dict
